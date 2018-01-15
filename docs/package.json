@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "gitbook-plugin-unictheme": "git+https://github.com/unic/gitbook-plugin-unictheme.git"
+  }
+}
