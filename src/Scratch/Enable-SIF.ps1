@@ -6,7 +6,10 @@ function Enable-SIF {
         [Parameter(Mandatory = $true)]
         [string] $FundamentalsPath
     )
-    Procces {
+    Process {
+        Import-Module $SifPath -force
+        Import-Module $FundamentalsPath -force
 
+        Register-SitecoreInstallExtension -Command Invoke-TryGetCertificateThumbprintConfigFunction -As TryGetCertificateThumbprint -Type ConfigFunction -force
     }
 }
