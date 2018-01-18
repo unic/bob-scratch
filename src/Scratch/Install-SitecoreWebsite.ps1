@@ -23,6 +23,7 @@ Requirements for configuration file comparing to default sitecore-XP0.json
                     "Skip": "[parameter('WdpSkip')]",
 
 - parameters not anymore mandatory: SolrCorePrefix
+
 #>
 function Install-SitecoreWebsite {
     [CmdletBinding()]

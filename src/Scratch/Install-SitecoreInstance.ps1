@@ -10,7 +10,9 @@ Install-SitecoreInstance -ConfigPath "D:\asia\scratch\sitecore-XP0.json" -Sitena
 
 .NOTES
 Requirements for configuration file comparing to default sitecore-XP0.json
+
 - parameters not anymore mandatory: Package, LicenseFile, SolrCorePrefix
+
 #>
 function Install-SitecoreInstance {
     [CmdletBinding()]

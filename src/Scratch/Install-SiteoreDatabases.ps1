@@ -21,8 +21,14 @@ Requirements for configuration file comparing to default sitecore-XP0.json
 - added to InstallWDP.Params.Arguments:
                     "Skip": "[parameter('WdpSkip')]",
 
-- parameters not anymore mandatory: LicenseFile, SolrCorePrefix, XConnectCert (also Security.XConnect.CertificateThumbprint variable)
+- parameters not anymore mandatory: LicenseFile, SolrCorePrefix, XConnectCert
 
+- to handle invalid XConnectCert:
+    1. added to Modules:
+	Modules : [
+		".\\SifExtension\\GetCertificateThumbprintSilently.psm1"
+    ]
+    2. variable Security.XConnect.CertificateThumbprint change to "[TryGetCertificateThumbprint(parameter('XConnectCert'), variable('Security.CertificateStore'))]"
 #>
 function Install-SitecoreDatabases {
     [CmdletBinding()]
