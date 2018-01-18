@@ -25,7 +25,7 @@ function Install-SitecoreInstance {
             Path = $ConfigPath
             Sitename = $Sitename
             XConnectCert = $XConnectCertificateName
-            Skip = @("InstallWDP", "UpdateSolrSchema")
+            Skip = @("InstallWDP", "SetLicense", "UpdateSolrSchema")
         }             
         Install-SitecoreConfiguration @sitecoreParams
     }

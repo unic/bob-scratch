@@ -58,7 +58,7 @@ function Install-SitecoreWebsite {
             XConnectCert = $XConnectCertificateName
             LicenseFile = $LicenseFile
             WdpSkip = @{ "objectName" = "dbDacFx" }, @{ "objectName" = "dbFullSql" }
-            Tasks = @("CreatePaths", "InstallWDP", "SetLicense")
+            Tasks = @("CreatePaths", "StopAppPool", "InstallWDP", "SetLicense", "StartAppPool")
         }             
         Install-SitecoreConfiguration @sitecoreParams
     }
