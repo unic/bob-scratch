@@ -20,7 +20,7 @@ Requirements for configuration file comparing to default sitecore-XP0.json
     ]
     2. variable Security.XConnect.CertificateThumbprint change to "[TryGetCertificateThumbprint(parameter('XConnectCert'), variable('Security.CertificateStore'))]"
 #>
-function Install-SolrSchema {
+function Install-SitecoreSolrSchema {
     [CmdletBinding()]
     Param(
         [string] $ConfigPath,
@@ -30,10 +30,10 @@ function Install-SolrSchema {
     Process {
 
         $sitecoreParams = @{
-            Path = $ConfigPath
-            Sitename = $Sitename
+            Path                  = $ConfigPath
+            Sitename              = $Sitename
             SitecoreAdminPassword = $SitecoreAdminPassword
-            Tasks = @("UpdateSolrSchema")
+            Tasks                 = @("UpdateSolrSchema")
         }             
         Install-SitecoreConfiguration @sitecoreParams
     }

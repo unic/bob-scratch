@@ -11,7 +11,7 @@ Install-SitecoreInstance -ConfigPath "D:\asia\scratch\sitecore-XP0.json" -Sitena
 .NOTES
 Requirements for configuration file comparing to default sitecore-XP0.json
 
-- parameters not anymore mandatory: Package, LicenseFile, SolrCorePrefix
+- parameters not anymore mandatory: Package, LicenseFile, SolrCorePrefix, SqlDbPrefix
 
 #>
 function Install-SitecoreInstance {
@@ -24,10 +24,10 @@ function Install-SitecoreInstance {
     Process {
 
         $sitecoreParams = @{
-            Path = $ConfigPath
-            Sitename = $Sitename
+            Path         = $ConfigPath
+            Sitename     = $Sitename
             XConnectCert = $XConnectCertificateName
-            Skip = @("InstallWDP", "SetLicense", "UpdateSolrSchema")
+            Skip         = @("InstallWDP", "SetLicense", "UpdateSolrSchema")
         }             
         Install-SitecoreConfiguration @sitecoreParams
     }

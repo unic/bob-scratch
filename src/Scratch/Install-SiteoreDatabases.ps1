@@ -44,23 +44,23 @@ function Install-SitecoreDatabases {
     Process {
 
         $sitecoreParams = @{
-            Path = $ConfigPath
-            Package = $PackagePath
-            SqlDbPrefix = $SqlDbPrefix
-            SqlServer = $SqlServer
-            SqlAdminUser = $SqlAdminUser
-            SqlAdminPassword = $SqlAdminPassword
-            SqlCorePassword = $SqlUserPassword
-            SqlMasterPassword = $SqlUserPassword
-            SqlWebPassword = $SqlUserPassword
-            SqlReportingPassword = $SqlUserPassword
-            SqlProcessingPoolsPassword = $SqlUserPassword
-            SqlProcessingTasksPassword = $SqlUserPassword
-            SqlReferenceDataPassword = $SqlUserPassword
+            Path                           = $ConfigPath
+            Package                        = $PackagePath
+            SqlDbPrefix                    = $SqlDbPrefix
+            SqlServer                      = $SqlServer
+            SqlAdminUser                   = $SqlAdminUser
+            SqlAdminPassword               = $SqlAdminPassword
+            SqlCorePassword                = $SqlUserPassword
+            SqlMasterPassword              = $SqlUserPassword
+            SqlWebPassword                 = $SqlUserPassword
+            SqlReportingPassword           = $SqlUserPassword
+            SqlProcessingPoolsPassword     = $SqlUserPassword
+            SqlProcessingTasksPassword     = $SqlUserPassword
+            SqlReferenceDataPassword       = $SqlUserPassword
             SqlMarketingAutomationPassword = $SqlUserPassword
-            SqlFormsPassword = $SqlUserPassword
-            WdpSkip = @{ "objectName" = "iisApp" }
-            Tasks = @("InstallWDP")
+            SqlFormsPassword               = $SqlUserPassword
+            WdpSkip                        = @{ "objectName" = "iisApp" }
+            Tasks                          = @("InstallWDP")
         }             
         Install-SitecoreConfiguration @sitecoreParams
     }

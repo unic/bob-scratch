@@ -41,25 +41,25 @@ function Install-SitecoreWebsite {
     Process {
 
         $sitecoreParams = @{
-            Path = $ConfigPath
-            Package = $PackagePath
-            Sitename = $Sitename
-            SqlDbPrefix = $SqlDbPrefix
-            SqlServer = $SqlServer
-            SqlCorePassword = $SqlUserPassword
-            SqlMasterPassword = $SqlUserPassword
-            SqlWebPassword = $SqlUserPassword
-            SqlReportingPassword = $SqlUserPassword
-            SqlProcessingPoolsPassword = $SqlUserPassword
-            SqlProcessingTasksPassword = $SqlUserPassword
-            SqlReferenceDataPassword = $SqlUserPassword
+            Path                           = $ConfigPath
+            Package                        = $PackagePath
+            Sitename                       = $Sitename
+            SqlDbPrefix                    = $SqlDbPrefix
+            SqlServer                      = $SqlServer
+            SqlCorePassword                = $SqlUserPassword
+            SqlMasterPassword              = $SqlUserPassword
+            SqlWebPassword                 = $SqlUserPassword
+            SqlReportingPassword           = $SqlUserPassword
+            SqlProcessingPoolsPassword     = $SqlUserPassword
+            SqlProcessingTasksPassword     = $SqlUserPassword
+            SqlReferenceDataPassword       = $SqlUserPassword
             SqlMarketingAutomationPassword = $SqlUserPassword
-            SqlFormsPassword = $SqlUserPassword
-            SolrCorePrefix = $SolrCorePrefix
-            XConnectCert = $XConnectCertificateName
-            LicenseFile = $LicenseFile
-            WdpSkip = @{ "objectName" = "dbDacFx" }, @{ "objectName" = "dbFullSql" }
-            Tasks = @("CreatePaths", "StopAppPool", "InstallWDP", "SetLicense", "StartAppPool")
+            SqlFormsPassword               = $SqlUserPassword
+            SolrCorePrefix                 = $SolrCorePrefix
+            XConnectCert                   = $XConnectCertificateName
+            LicenseFile                    = $LicenseFile
+            WdpSkip                        = @{ "objectName" = "dbDacFx" }, @{ "objectName" = "dbFullSql" }
+            Tasks                          = @("CreatePaths", "StopAppPool", "InstallWDP", "SetLicense", "StartAppPool")
         }             
         Install-SitecoreConfiguration @sitecoreParams
     }
