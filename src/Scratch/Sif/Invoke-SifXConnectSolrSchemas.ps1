@@ -3,7 +3,7 @@
 Webiste has to be installed first because of reference to App_data\solrcommands\schema.json
 
 #>
-function Install-XConnectSolrSchemas {
+function Invoke-SifXConnectSolrSchemas {
     [CmdletBinding()]
     Param(
         [string] $prefix,

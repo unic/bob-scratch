@@ -1,5 +1,5 @@
 
-function Install-XConnectWebsite {
+function Invoke-SifXConnectWebsite {
     [CmdletBinding()]
     Param(
         [string] $Prefix,

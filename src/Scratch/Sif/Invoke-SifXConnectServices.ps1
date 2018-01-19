@@ -11,7 +11,7 @@ Installs IndexWorker and MarketingAutomationEngine services.
 Webiste has to be installed first because of reference to App_Data\jobs\continuous\(AutomationEngine|IndexWorker) content.
 
 #>
-function Install-XConnectServices {
+function Invoke-SifXConnectServices {
     [CmdletBinding()]
     Param(
         [string] $Prefix,

@@ -11,7 +11,7 @@ Initialize shards in ShardMapManager database.
 Webiste and database have to be installed first because of reference to App_Data\jobs\continuous\collectiondeployment content and ShardMapManager database.
 
 #>
-function Install-XConnectShards {
+function Invoke-SifXConnectShards {
     [CmdletBinding()]
     Param(
         [string] $Prefix,

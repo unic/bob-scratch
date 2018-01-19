@@ -30,7 +30,7 @@ Requirements for configuration file comparing to default sitecore-XP0.json
     2. variable Security.XConnect.CertificateThumbprint change to "[TryGetCertificateThumbprint(parameter('XConnectCert'), variable('Security.CertificateStore'))]"
 #>
 
-function Install-XConnectDatabases {
+function Invoke-SifXConnectDatabases {
     [CmdletBinding()]
     Param(
         [string] $Prefix,

@@ -14,7 +14,7 @@ Requirements for configuration file comparing to default xconnect-XP0.json
 - [variable('Site.DataFolder')] added to CreatePaths task
 
 #>
-function Install-XConnectInstance {
+function Invoke-SifXConnectInstance {
     [CmdletBinding()]
     Param(
         [string] $Prefix,

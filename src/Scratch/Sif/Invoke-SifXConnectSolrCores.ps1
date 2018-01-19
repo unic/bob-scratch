@@ -1,5 +1,5 @@
 
-function Install-XConnectSolrCores {
+function Invoke-SifXConnectSolrCores {
     [CmdletBinding()]
     Param(
         [string] $Prefix,

@@ -25,7 +25,7 @@ Requirements for configuration file comparing to default sitecore-XP0.json
 - parameters not anymore mandatory: SolrCorePrefix
 
 #>
-function Install-SitecoreWebsite {
+function Invoke-SifSitecoreWebsite {
     [CmdletBinding()]
     Param(
         [string] $ConfigPath,
