@@ -6,9 +6,9 @@ Installs Sitecore from WebDeploy package.
 Installs Sitecore to existing website, from WebDeploy package, using SIF. Copy license file. Updates ConnectionStrings.config
 
 .EXAMPLE
-Install-SitecoreWebsite -ConfigPath "D:\asia\scratch\sitecore-XP0.json" -PackagePath "D:\asia\scratch\Sitecore9.scwdp.zip" `
+Install-SitecoreWebsite -ConfigPath "sitecore-XP0.json" -PackagePath "Sitecore9.scwdp.zip" `
     -SqlDbPrefix "xp0" -SolrCorePrefix "xp0" -SqlUserPassword "H6dfVh2QGU" -SqlServer "localhost" `
-    -LicenseFile "D:\asia\scratch\license.xml" -Sitename "xp0.sc" -XConnectCertificateName "xp0.xconnect_client"
+    -LicenseFile "license.xml" -Sitename "xp0.sc" -XConnectCertificateName "xp0.xconnect_client"
 
 .NOTES
 Requirements for configuration file comparing to default sitecore-XP0.json
@@ -36,7 +36,7 @@ function Invoke-SifSitecoreWebsite {
         [string] $SqlServer,
         [string] $LicenseFile,
         [string] $Sitename,
-        [string] $XConnectCertificateName
+        [string] $XConnectCert
     )
     Process {
 
@@ -56,7 +56,7 @@ function Invoke-SifSitecoreWebsite {
             SqlMarketingAutomationPassword = $SqlUserPassword
             SqlFormsPassword               = $SqlUserPassword
             SolrCorePrefix                 = $SolrCorePrefix
-            XConnectCert                   = $XConnectCertificateName
+            XConnectCert                   = $XConnectCert
             LicenseFile                    = $LicenseFile
             WdpSkip                        = @{ "objectName" = "dbDacFx" }, @{ "objectName" = "dbFullSql" }
             Tasks                          = @("CreatePaths", "StopAppPool", "InstallWDP", "SetLicense", "StartAppPool")

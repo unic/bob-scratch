@@ -16,6 +16,7 @@ function ResolvePath() {
 }
 
 Get-ChildItem -Path $PSScriptRoot\*.ps1 -Exclude *.tests.ps1 | Foreach-Object { . $_.FullName }
+Get-ChildItem -Path $PSScriptRoot\Sif\*.ps1 -Exclude *.tests.ps1 | Foreach-Object { . $_.FullName }
 Export-ModuleMember -Function * -Alias *
 
 $VerbosePreference = "Continue"

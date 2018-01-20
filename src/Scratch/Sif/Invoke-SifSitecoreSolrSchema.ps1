@@ -4,9 +4,10 @@ Updates solr schema.
 
 .DESCRIPTION
 Updates solr schema by calling /sitecore/admin/PopulateManagedSchema.aspx?indexes=all
+https://doc.sitecore.net/sitecore_experience_platform/setting_up_and_maintaining/search_and_indexing/solr_managed_schemas
 
 .EXAMPLE
-Install-SolrSchema -ConfigPath "D:\asia\scratch\sitecore-XP0.json" -Sitename "xp0.sc"
+Install-SolrSchema -ConfigPath "sitecore-XP0.json" -Sitename "xp0.sc"
 
 .NOTES
 Requirements for configuration file comparing to default sitecore-XP0.json

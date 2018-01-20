@@ -6,7 +6,7 @@ Installs Sitecore databases from WebDeploy package
 Installs all databases from WebDeploy package using SIF.
 
 .EXAMPLE
-Install-SitecoreDatabases -ConfigPath "D:\asia\scratch\sitecore-XP0.json" -PackagePath "D:\asia\scratch\Sitecore9.scwdp.zip" `
+Install-SitecoreDatabases -ConfigPath "sitecore-XP0.json" -PackagePath "Sitecore9.scwdp.zip" `
     -SqlDbPrefix "xp0" -SqlUserPassword "H6dfVh2QGU" -SqlServer "localhost" -SqlAdminUser "sa" -SqlAdminPassword "sa"
 
 .NOTES

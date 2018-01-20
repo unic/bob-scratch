@@ -6,7 +6,7 @@ Installs IIS site and sets permissions.
 Installs IIS site and sets permissions.
 
 .EXAMPLE
-Install-SitecoreInstance -ConfigPath "D:\asia\scratch\sitecore-XP0.json" -Sitename "xp0.sc" -XConnectCertificateName "xp0.xconnect_client"
+Install-SitecoreInstance -ConfigPath "sitecore-XP0.json" -Sitename "xp0.sc" -XConnectCertificateName "xp0.xconnect_client"
 
 .NOTES
 Requirements for configuration file comparing to default sitecore-XP0.json

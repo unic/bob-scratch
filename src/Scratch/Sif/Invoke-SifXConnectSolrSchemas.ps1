@@ -2,21 +2,27 @@
 .NOTES
 Webiste has to be installed first because of reference to App_data\solrcommands\schema.json
 
+.EXAMPLE
+Invoke-SifXConnectSolrSchemas -ConfigPath "xconnect-xp0.json" -Sitename "$prefix.xconnect" `
+    -SolrUrl "https://localhost:8989/solr" -SolrCorePrefix  $prefix
+
 #>
 function Invoke-SifXConnectSolrSchemas {
     [CmdletBinding()]
     Param(
-        [string] $prefix,
-        [string] $ConfigPath = "d:\asia\scratch\xconnect-xp0.json"
+        [string] $ConfigPath,
+        [string] $Sitename,
+        [string] $SolrUrl,
+        [string] $SolrCorePrefix
     )
     Process {
 
         $xconnectParams = @{
             Path           = $ConfigPath
-            Sitename       = "$prefix.xconnect"
-            SolrURL        = "https://localhost:8989/solr"
+            Sitename       = $Sitename
+            SolrURL        = $SolrUrl
+            SolrCorePrefix = $SolrCorePrefix
             Tasks          = @("ConfigureSolrSchemas")
-            SolrCorePrefix = $prefix
         }             
         Install-SitecoreConfiguration @xconnectParams
     }

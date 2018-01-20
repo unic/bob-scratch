@@ -6,9 +6,13 @@ Installs xConnect databases from WebDeploy package
 Installs all databases from WebDeploy package using SIF.
 
 .EXAMPLE
-
+Invoke-SifXConnectDatabases -ConfigPath "xconnect-xp0.json" -PackagePath "Sitecore9_xp0xconnect.scwdp.zip" `
+    -SqlDbPrefix $prefix -SqlServer "localhost" -SqlAdminUser "sa" -SqlAdminPassword "sa" -SqlUserPassword "H6dfVh2QGU"
 
 .NOTES
+Before running it for a second time on same databases, manual task might be required - removing sql users: poolsuser, marketingautomationuser, referencedatauser.
+Issue explained here: https://chebalt.wordpress.com/2017/11/22/sitecore-9-installation-tips/
+
 Requirements for configuration file comparing to default sitecore-XP0.json
 - added to Parameters:
 		"WdpSkip": {
@@ -33,23 +37,27 @@ Requirements for configuration file comparing to default sitecore-XP0.json
 function Invoke-SifXConnectDatabases {
     [CmdletBinding()]
     Param(
-        [string] $Prefix,
-        [string] $ConfigPath = "d:\asia\scratch\xconnect-xp0.json",
-        [string] $PackagePath = "d:\asia\scratch\Sitecore9_xp0xconnect.scwdp.zip"        
+        [string] $ConfigPath,
+        [string] $PackagePath,
+        [string] $SqlDbPrefix,
+        [string] $SqlUserPassword,
+        [string] $SqlServer,
+        [string] $SqlAdminUser,
+        [string] $SqlAdminPassword 
     )
     Process {
 
         $xconnectParams = @{
             Path                           = $ConfigPath
             Package                        = $PackagePath
-            SqlDbPrefix                    = $prefix
-            SqlServer                      = "localhost"
-            SqlAdminUser                   = "sa"
-            SqlAdminPassword               = "sa"
-            SqlCollectionPassword          = "H6dfVh2QGU"
-            SqlProcessingPoolsPassword     = "H6dfVh2QGU"
-            SqlReferenceDataPassword       = "H6dfVh2QGU"
-            SqlMarketingAutomationPassword = "H6dfVh2QGU"
+            SqlDbPrefix                    = $SqlDbPrefix
+            SqlServer                      = $SqlServer
+            SqlAdminUser                   = $SqlAdminUser
+            SqlAdminPassword               = $SqlAdminPassword
+            SqlCollectionPassword          = $SqlUserPassword
+            SqlProcessingPoolsPassword     = $SqlUserPassword
+            SqlReferenceDataPassword       = $SqlUserPassword
+            SqlMarketingAutomationPassword = $SqlUserPassword
             WdpSkip                        = @{ "objectName" = "iisApp" }, @{"objectName" ="setAcl"}
             Tasks                          = @("InstallWDP")
         }

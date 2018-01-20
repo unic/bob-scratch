@@ -1,12 +1,19 @@
+<#
+.SYNOPSIS
+Installs xConnect Solr cores.
 
+.EXAMPLE
+Invoke-SifXConnectSolrCores -ConfigPath "xconnect-solr.json" -SolrUrl "https://localhost:8989/solr" `
+    -SolrRoot "C:\Solr-6.6.2" -SolrService "solr6" -SolrCorePrefix $prefix
+#>
 function Invoke-SifXConnectSolrCores {
     [CmdletBinding()]
     Param(
-        [string] $Prefix,
-        [string] $ConfigPath = "d:\asia\scratch\xconnect-solr.json",
-        [string] $SolrUrl = "https://localhost:8989/solr",
-        [string] $SolrRoot = "C:\Solr-6.6.2",
-        [string] $SolrService = "solr6"
+        [string] $ConfigPath,
+        [string] $SolrUrl,
+        [string] $SolrRoot,
+        [string] $SolrService,
+        [string] $SolrCorePrefix
     )
     Process {
         $xconnectParams = @{
@@ -14,7 +21,7 @@ function Invoke-SifXConnectSolrCores {
             SolrUrl     = $SolrUrl
             SolrRoot    = $SolrRoot
             SolrService = $SolrService
-            CorePrefix  = $prefix
+            CorePrefix  = $SolrCorePrefix
         }
         Install-SitecoreConfiguration @xconnectParams
     }
