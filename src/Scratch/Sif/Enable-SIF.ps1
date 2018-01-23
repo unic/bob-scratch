@@ -7,7 +7,7 @@ function Enable-SIF {
         [string] $FundamentalsPath
     )
     Process {
-        Import-Module $FundamentalsPath -force
-        Import-Module $SifPath -force
+        Import-Module $FundamentalsPath
+        Import-Module $SifPath
     }
 }

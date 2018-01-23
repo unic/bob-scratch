@@ -19,4 +19,9 @@ Get-ChildItem -Path $PSScriptRoot\*.ps1 -Exclude *.tests.ps1 | Foreach-Object { 
 Get-ChildItem -Path $PSScriptRoot\Sif\*.ps1 -Exclude *.tests.ps1 | Foreach-Object { . $_.FullName }
 Export-ModuleMember -Function * -Alias *
 
+Import-Module (ResolvePath "Unic.Bob.Wendy" "tools\Wendy") -Force
+Export-ModuleMember -Function Get-ScProjectConfig
+
+Enable-SIF -SifPath .\Resources\SitecoreInstallFramework -FundamentalsPath .\Resources\SitecoreFundamentals
+
 $VerbosePreference = "Continue"

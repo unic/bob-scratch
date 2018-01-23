@@ -34,14 +34,18 @@ function Invoke-SifSitecoreDatabases {
     [CmdletBinding()]
     Param(
         [string] $ConfigPath,
-        [string] $PackagePath,
-        [string] $SqlDbPrefix,
-        [string] $SqlUserPassword,
-        [string] $SqlServer,
-        [string] $SqlAdminUser,
-        [string] $SqlAdminPassword
+        [string] $PackagePath
     )
     Process {
+        $InstallationConfig = Get-ScProjectConfig -ConfigFileName @("Installation.config", "Installation.config.user")
+
+        # Database parameters (used to setup databases)
+        $SqlDbPrefix = $InstallationConfig.DatabaseDbPrefix
+        $SqlDbServer = $InstallationConfig.DatabaseServer
+        $SqlDbSitecoreUserPwd = $InstallationConfig.DatabaseSitecoreDbUserPwd
+        
+        $SqlAdminUser = $config.DatabaseAdminUser
+        $SqlAdminPwd = $config.DatabaseAdminPwd
 
         $sitecoreParams = @{
             Path                           = $ConfigPath
@@ -50,15 +54,16 @@ function Invoke-SifSitecoreDatabases {
             SqlServer                      = $SqlServer
             SqlAdminUser                   = $SqlAdminUser
             SqlAdminPassword               = $SqlAdminPassword
-            SqlCorePassword                = $SqlUserPassword
-            SqlMasterPassword              = $SqlUserPassword
-            SqlWebPassword                 = $SqlUserPassword
-            SqlReportingPassword           = $SqlUserPassword
-            SqlProcessingPoolsPassword     = $SqlUserPassword
-            SqlProcessingTasksPassword     = $SqlUserPassword
-            SqlReferenceDataPassword       = $SqlUserPassword
-            SqlMarketingAutomationPassword = $SqlUserPassword
-            SqlFormsPassword               = $SqlUserPassword
+            SqlCorePassword                = $SqlDbSitecoreUserPwd
+            SqlMasterPassword              = $SqlDbSitecoreUserPwd
+            SqlWebPassword                 = $SqlDbSitecoreUserPwd
+            SqlReportingPassword           = $SqlDbSitecoreUserPwd
+            SqlProcessingPoolsPassword     = $SqlDbSitecoreUserPwd
+            SqlProcessingTasksPassword     = $SqlDbSitecoreUserPwd
+            SqlReferenceDataPassword       = $SqlDbSitecoreUserPwd
+            SqlMarketingAutomationPassword = $SqlDbSitecoreUserPwd
+            SqlFormsPassword               = $SqlDbSitecoreUserPwd
+            SqlExmMasterPassword           = $SqlDbSitecoreUserPwd
             WdpSkip                        = @{ "objectName" = "iisApp" }
             Tasks                          = @("InstallWDP")
         }             
