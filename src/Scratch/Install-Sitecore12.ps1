@@ -47,11 +47,11 @@ function Install-Sitecore12 {
                 #New-SifSitecoreCertificates -ConfigPath $SifConfigPathCreateCerts -CertPathFolder $CertPathFolder
             }
             else {
-                Write-Warning "'$SifConfigPathNewSitecoreCerts' does not exist, skipping creation of self signed certs for Sitecore."
+                Write-Warning "'$SifConfigPathCreateCerts' does not exist, skipping creation of self signed certs for Sitecore."
             }
         }
         else {
-            Write-Warning "Parameter 'SifConfigPathNewSitecoreCerts' not provided, skipping creation of self signed certs for Sitecore."
+            Write-Warning "Parameter 'SifConfigPathCreateCerts' not provided, skipping creation of self signed certs for Sitecore."
         }
 
         # Install Sitecore Databases
