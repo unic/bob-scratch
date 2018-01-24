@@ -15,8 +15,7 @@ function ResolvePath() {
     Write-Error "No path found for $RelativePath in package $PackageId"
 }
 
-Get-ChildItem -Path $PSScriptRoot\*.ps1 -Exclude *.tests.ps1 | Foreach-Object { . $_.FullName }
-Get-ChildItem -Path $PSScriptRoot\Sif\*.ps1 -Exclude *.tests.ps1 | Foreach-Object { . $_.FullName }
+Get-ChildItem -Path $PSScriptRoot\*.ps1 -Recurse -Exclude *.tests.ps1 | Foreach-Object { . $_.FullName }
 Export-ModuleMember -Function * -Alias *
 
 Import-Module (ResolvePath "Unic.Bob.Wendy" "tools\Wendy") -Force

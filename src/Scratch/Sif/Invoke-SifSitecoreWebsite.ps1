@@ -47,7 +47,7 @@ function Invoke-SifSitecoreWebsite {
         $SolrCorePrefix = $InstallationConfig.SolrCorePrefix
         $SolrUrl = $InstallationConfig.SolrUrl
         # XConnect parameters (used to replace values in connectionString.config)
-        $XConnectCollectionService = $InstallationConfig.XConnectCollectionServiceUrl
+        $xConnectRootUrl = Get-XConnectWebsiteUrl
         $XConnectClientCertificateName = $InstallationConfig.XConnectClientCertificateName
 
 
@@ -71,7 +71,7 @@ function Invoke-SifSitecoreWebsite {
             SqlExmMasterPassword           = $SqlDbSitecoreUserPwd
             SolrCorePrefix                 = $SolrCorePrefix
             SolrUrl                        = $SolrUrl
-            XConnectCollectionService      = $XConnectCollectionService
+            XConnectCollectionService      = $xConnectRootUrl
             XConnectCert                   = $XConnectClientCertificateName
             LicenseFile                    = $LicenseFile
             WdpSkip                        = @{ "objectName" = "dbDacFx" }, @{ "objectName" = "dbFullSql" }

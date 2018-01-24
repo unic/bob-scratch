@@ -19,15 +19,28 @@ function Invoke-SifXConnectInstance {
     [CmdletBinding()]
     Param(
         [string] $ConfigPath,
-        [string] $Sitename,
-        [string] $XConnectCert      
+        [string] $CertPathFolder
     )
     Process {
 
+        $InstallationConfig = Get-ScProjectConfig -ConfigFileName @("Installation.config", "Installation.config.user")
+
+        # Site parameters
+        $SiteGlobalWebPath = $InstallationConfig.GlobalWebPath
+        $Sitename = $InstallationConfig.XConnectWebsiteCodename 
+        $WebFolderName = $InstallationConfig.XConnectWebFoldername
+        # Additional parameters 
+        $HostsFileComment = $InstallationConfig.HostsFileComment
+        $XConnectClientCertificateName = $InstallationConfig.XConnectClientCertificateName
+
         $xconnectParams = @{
-            Path         = $ConfigPath
-            Sitename     = $Sitename
-            XConnectCert = $XConnectCert
+            Path                = $ConfigPath
+            SiteGlobalWebPath   = $SiteGlobalWebPath
+            Sitename            = $Sitename
+            WebFolderName       = $WebFolderName
+            HostsFileComment    = $HostsFileComment
+            XConnectCert        = $XConnectClientCertificateName
+            CertPath            = $CertPathFolder        
             Tasks        = @("CreatePaths", "CreateAppPool", "SetAppPoolCertStorePermissions", "CreateWebsite", "StopWebsite", "StopAppPool", `
                     "RemoveDefaultBinding", "CreateBindingsWithThumprint", "SetClientCertificatePermissions", "SupportListManagerLargeUpload", `
                     "CreateHostHeader", "SetPermissions", "CreateBindingsWithDevelopmentThumprint", "SetServicesCertStorePermissions", `

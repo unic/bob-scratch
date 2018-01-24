@@ -16,23 +16,34 @@ Webiste and database have to be installed first because of reference to App_Data
 function Invoke-SifXConnectShards {
     [CmdletBinding()]
     Param(
-        [string] $ConfigPath,
-        [string] $Sitename,
-        [string] $SqlDbPrefix,
-        [string] $SqlServer,
-        [string] $SqlAdminUser,
-        [string] $SqlAdminPassword    
+        [string] $ConfigPath
     )
     Process {
 
+        $InstallationConfig = Get-ScProjectConfig -ConfigFileName @("Installation.config", "Installation.config.user")
+
+        # Site parameters
+        $SiteGlobalWebPath = $InstallationConfig.GlobalWebPath
+        $Sitename = $InstallationConfig.XConnectWebsiteCodename 
+        $WebFolderName = $InstallationConfig.XConnectWebFoldername
+        # Database parameters (used to setup databases)
+        $SqlDbPrefix = $InstallationConfig.DatabaseDbPrefix
+        $SqlDbServer = $InstallationConfig.DatabaseServer
+        $SqlDbSitecoreUserPwd = $InstallationConfig.DatabaseSitecoreDbUserPwd
+        
+        $SqlAdminUser = $InstallationConfig.DatabaseAdminUser
+        $SqlAdminPwd = $InstallationConfig.DatabaseAdminPwd
+
         $xconnectParams = @{
             Path             = $ConfigPath
-            Sitename         = $Sitename
+            SiteGlobalWebPath   = $SiteGlobalWebPath
+            Sitename            = $Sitename
+            WebFolderName       = $WebFolderName
             SqlDbPrefix      = $SqlDbPrefix
-            SqlServer        = $SqlServer
+            SqlServer        = $SqlDbServer
             SqlAdminUser     = $SqlAdminUser
-            SqlAdminPassword = $SqlAdminPassword
-            Tasks            = @("CleanShards", "CreateShards")
+            SqlAdminPassword = $SqlAdminPwd
+            Tasks            = @("CleanShards", "CreateShards", "CreateShardApplicationDatabaseServerLoginSqlCmd", "CreateShardManagerApplicationDatabaseUserSqlCmd", "CreateShard0ApplicationDatabaseUserSqlCmd", "CreateShard1ApplicationDatabaseUserSqlCmd")
         }
         Install-SitecoreConfiguration @xconnectParams
     }

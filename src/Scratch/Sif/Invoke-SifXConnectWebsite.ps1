@@ -13,29 +13,44 @@ function Invoke-SifXConnectWebsite {
     Param(
         [string] $ConfigPath,
         [string] $PackagePath,
-        [string] $LicenseFile,
-        [string] $SqlDbPrefix,
-        [string] $SolrCorePrefix,
-        [string] $SqlUserPassword,
-        [string] $SqlServer,
-        [string] $Sitename,
-        [string] $XConnectCert
+        [string] $LicenseFile
     )
     Process {
+        $InstallationConfig = Get-ScProjectConfig -ConfigFileName @("Installation.config", "Installation.config.user")
 
+        # Site parameters
+        $SiteGlobalWebPath = $InstallationConfig.GlobalWebPath
+        $Sitename = $InstallationConfig.XConnectWebsiteCodename 
+        $WebFolderName = $InstallationConfig.XConnectWebFoldername
+        # Database parameters (used to replace values in connectionString.config)
+        $SqlDbPrefix = $InstallationConfig.DatabaseDbPrefix
+        $SqlDbServer = $InstallationConfig.DatabaseServer
+        $SqlDbSitecoreUserPwd = $InstallationConfig.DatabaseSitecoreDbUserPwd
+        # Solr parameters (used to replace values in solr patching files)
+        $SolrCorePrefix = $InstallationConfig.SolrCorePrefix
+        $SolrUrl = $InstallationConfig.SolrUrl
+        # XConnect parameters (used to replace values in connectionString.config)
+        $XConnectClientCertificateName = $InstallationConfig.XConnectClientCertificateName
+        $xConnectRootUrl = Get-XConnectWebsiteUrl
+        
         $xconnectParams = @{
             Path                           = $ConfigPath
             Package                        = $PackagePath
-            LicenseFile                    = $LicenseFile
+            SiteGlobalWebPath              = $SiteGlobalWebPath
             Sitename                       = $Sitename
-            XConnectCert                   = $XConnectCert
+            WebFolderName                  = $WebFolderName
+            SiteUrl                        = $xConnectRootUrl
             SqlDbPrefix                    = $SqlDbPrefix
-            SqlServer                      = $SqlServer
+            SqlServer                      = $SqlDbServer
+            SqlCollectionPassword          = $SqlDbSitecoreUserPwd
+            SqlProcessingPoolsPassword     = $SqlDbSitecoreUserPwd
+            SqlReferenceDataPassword       = $SqlDbSitecoreUserPwd
+            SqlMarketingAutomationPassword = $SqlDbSitecoreUserPwd
+            SqlMessagingPassword           = $SqlDbSitecoreUserPwd
             SolrCorePrefix                 = $SolrCorePrefix
-            SqlCollectionPassword          = $SqlUserPassword
-            SqlProcessingPoolsPassword     = $SqlUserPassword
-            SqlReferenceDataPassword       = $SqlUserPassword
-            SqlMarketingAutomationPassword = $SqlUserPassword
+            SolrUrl                        = $SolrUrl
+            LicenseFile                    = $LicenseFile
+            XConnectCert                   = $XConnectClientCertificateName
             WdpSkip                        = @{ "objectName" = "dbDacFx" }, @{ "objectName" = "dbFullSql" }
             Tasks                          = @("CreatePaths", "StopAppPool", "InstallWDP", "SetLicense", "StartAppPool")
         }

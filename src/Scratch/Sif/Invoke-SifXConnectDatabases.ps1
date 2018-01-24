@@ -38,26 +38,31 @@ function Invoke-SifXConnectDatabases {
     [CmdletBinding()]
     Param(
         [string] $ConfigPath,
-        [string] $PackagePath,
-        [string] $SqlDbPrefix,
-        [string] $SqlUserPassword,
-        [string] $SqlServer,
-        [string] $SqlAdminUser,
-        [string] $SqlAdminPassword 
+        [string] $PackagePath
     )
     Process {
+        $InstallationConfig = Get-ScProjectConfig -ConfigFileName @("Installation.config", "Installation.config.user")
+
+        # Database parameters (used to setup databases)
+        $SqlDbPrefix = $InstallationConfig.DatabaseDbPrefix
+        $SqlDbServer = $InstallationConfig.DatabaseServer
+        $SqlDbSitecoreUserPwd = $InstallationConfig.DatabaseSitecoreDbUserPwd
+        
+        $SqlAdminUser = $InstallationConfig.DatabaseAdminUser
+        $SqlAdminPwd = $InstallationConfig.DatabaseAdminPwd
 
         $xconnectParams = @{
             Path                           = $ConfigPath
             Package                        = $PackagePath
             SqlDbPrefix                    = $SqlDbPrefix
-            SqlServer                      = $SqlServer
+            SqlServer                      = $SqlDbServer
             SqlAdminUser                   = $SqlAdminUser
-            SqlAdminPassword               = $SqlAdminPassword
-            SqlCollectionPassword          = $SqlUserPassword
-            SqlProcessingPoolsPassword     = $SqlUserPassword
-            SqlReferenceDataPassword       = $SqlUserPassword
-            SqlMarketingAutomationPassword = $SqlUserPassword
+            SqlAdminPassword               = $SqlAdminPwd
+            SqlCollectionPassword          = $SqlDbSitecoreUserPwd
+            SqlProcessingPoolsPassword     = $SqlDbSitecoreUserPwd
+            SqlReferenceDataPassword       = $SqlDbSitecoreUserPwd
+            SqlMarketingAutomationPassword = $SqlDbSitecoreUserPwd
+            SqlMessagingPassword           = $SqlDbSitecoreUserPwd
             WdpSkip                        = @{ "objectName" = "iisApp" }, @{"objectName" ="setAcl"}
             Tasks                          = @("InstallWDP")
         }

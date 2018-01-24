@@ -16,15 +16,23 @@ function Invoke-SifXConnectServices {
     [CmdletBinding()]
     Param(
         [string] $ConfigPath,
-        [string] $LicenseFile,
-        [string] $SiteName
+        [string] $LicenseFile
     )
     Process {
 
+        $InstallationConfig = Get-ScProjectConfig -ConfigFileName @("Installation.config", "Installation.config.user")
+
+        # Site parameters
+        $SiteGlobalWebPath = $InstallationConfig.GlobalWebPath
+        $Sitename = $InstallationConfig.XConnectWebsiteCodename 
+        $WebFolderName = $InstallationConfig.XConnectWebFoldername
+
         $xconnectParams = @{
             Path        = $ConfigPath
+            SiteGlobalWebPath   = $SiteGlobalWebPath
+            Sitename            = $Sitename
+            WebFolderName       = $WebFolderName
             LicenseFile = $LicenseFile
-            Sitename    = $SiteName
             Tasks       = @("StopServices", "RemoveServices", "CreateServicesLogPaths", "SetIndexWorkerServiceLicense", "SetMarketingAutomationServiceLicense", `
                     "SetIndexWorkerServicePermissions", "SetMarketingAutomationServicePermissions", "InstallServices", "StartServices")
         }
