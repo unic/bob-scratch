@@ -52,7 +52,9 @@ function Invoke-SifXConnectWebsite {
             LicenseFile                    = $LicenseFile
             XConnectCert                   = $XConnectClientCertificateName
             WdpSkip                        = @{ "objectName" = "dbDacFx" }, @{ "objectName" = "dbFullSql" }
-            Tasks                          = @("CreatePaths", "StopAppPool", "InstallWDP", "SetLicense", "StartAppPool")
+            Tasks                          = @("CreatePaths", "StopServices", "StopAppPool", "InstallWDP", "SetLicense", "StartAppPool")
+            # Important: XConnect Services are stopped because of File-locks, but not started because of missing licenses after redeployment of webroot dir.
+            # Use 'Invoke-SifXConnectServices' to get them prepared and started again
         }
         Install-SitecoreConfiguration @xconnectParams
     }
