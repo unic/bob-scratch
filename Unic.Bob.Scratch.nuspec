@@ -10,7 +10,7 @@
       <description>Scratch install Sitecore with SIF.</description>
     </metadata>
     <files>
-        <file src="Installation.config">
+        <file src="Installation.config" />
         <file src="src\**" />
         <file src="packages\**" target="tools" exclude="**\package\services\metadata\core-properties\**;**\Unic.Bob.Keith\**;**\pester\**" />
     </files>
