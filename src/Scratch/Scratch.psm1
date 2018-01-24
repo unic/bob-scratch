@@ -22,6 +22,4 @@ Export-ModuleMember -Function * -Alias *
 Import-Module (ResolvePath "Unic.Bob.Wendy" "tools\Wendy") -Force
 Export-ModuleMember -Function Get-ScProjectConfig
 
-Enable-SIF -SifPath .\Resources\SitecoreInstallFramework -FundamentalsPath .\Resources\SitecoreFundamentals
-
 $VerbosePreference = "Continue"

@@ -30,8 +30,7 @@ function Invoke-SifSitecoreWebsite {
     Param(
         [string] $ConfigPath,
         [string] $PackagePath,
-        [string] $LicenseFile,
-        [string] $XConnectCert
+        [string] $LicenseFile
     )
     Process {
         $InstallationConfig = Get-ScProjectConfig -ConfigFileName @("Installation.config", "Installation.config.user")
@@ -49,6 +48,7 @@ function Invoke-SifSitecoreWebsite {
         $SolrUrl = $InstallationConfig.SolrUrl
         # XConnect parameters (used to replace values in connectionString.config)
         $XConnectCollectionService = $InstallationConfig.XConnectCollectionServiceUrl
+        $XConnectClientCertificateName = $InstallationConfig.XConnectClientCertificateName
 
 
         $sitecoreParams = @{
@@ -72,7 +72,7 @@ function Invoke-SifSitecoreWebsite {
             SolrCorePrefix                 = $SolrCorePrefix
             SolrUrl                        = $SolrUrl
             XConnectCollectionService      = $XConnectCollectionService
-            XConnectCert                   = $XConnectCert
+            XConnectCert                   = $XConnectClientCertificateName
             LicenseFile                    = $LicenseFile
             WdpSkip                        = @{ "objectName" = "dbDacFx" }, @{ "objectName" = "dbFullSql" }
             Tasks                          = @("CreatePaths", "StopAppPool", "InstallWDP", "SetLicense", "StartAppPool")

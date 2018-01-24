@@ -33,7 +33,7 @@ function New-SifSitecoreCertificates {
     )
     Process {
 
-        Import-Module .\SifExtension\Invoke-GetBobIISBIndings.psm1 -force
+        Import-Module .\SifExtension\ScratchSifExposedExtension.psm1 -force
         $bindings = Invoke-GetBobIISBindingsConfigFunction
 
         $bindings | % {

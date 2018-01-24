@@ -44,16 +44,16 @@ function Invoke-SifSitecoreDatabases {
         $SqlDbServer = $InstallationConfig.DatabaseServer
         $SqlDbSitecoreUserPwd = $InstallationConfig.DatabaseSitecoreDbUserPwd
         
-        $SqlAdminUser = $config.DatabaseAdminUser
-        $SqlAdminPwd = $config.DatabaseAdminPwd
+        $SqlAdminUser = $InstallationConfig.DatabaseAdminUser
+        $SqlAdminPwd = $InstallationConfig.DatabaseAdminPwd
 
         $sitecoreParams = @{
             Path                           = $ConfigPath
             Package                        = $PackagePath
             SqlDbPrefix                    = $SqlDbPrefix
-            SqlServer                      = $SqlServer
+            SqlServer                      = $SqlDbServer
             SqlAdminUser                   = $SqlAdminUser
-            SqlAdminPassword               = $SqlAdminPassword
+            SqlAdminPassword               = $SqlAdminPwd
             SqlCorePassword                = $SqlDbSitecoreUserPwd
             SqlMasterPassword              = $SqlDbSitecoreUserPwd
             SqlWebPassword                 = $SqlDbSitecoreUserPwd

@@ -17,8 +17,7 @@ Requirements for configuration file comparing to default sitecore-XP0.json
 function Invoke-SifSitecoreInstance {
     [CmdletBinding()]
     Param(
-        [string] $ConfigPath,
-        [string] $XConnectCertificateName
+        [string] $ConfigPath
     )
     Process {
         $InstallationConfig = Get-ScProjectConfig -ConfigFileName @("Installation.config", "Installation.config.user")
@@ -29,6 +28,7 @@ function Invoke-SifSitecoreInstance {
         $WebFolderName = $InstallationConfig.WebFolderName
         # Additional parameters 
         $HostsFileComment = $InstallationConfig.HostsFileComment
+        $XConnectClientCertificateName = $InstallationConfig.XConnectClientCertificateName
 
         $sitecoreParams = @{
             Path                = $ConfigPath
@@ -36,7 +36,7 @@ function Invoke-SifSitecoreInstance {
             Sitename            = $Sitename
             WebFolderName       = $WebFolderName
             HostsFileComment    = $HostsFileComment
-            XConnectCert        = $XConnectCertificateName
+            XConnectCert        = $XConnectClientCertificateName
             Skip                = @("InstallWDP", "SetLicense", "UpdateSolrSchema")
         }             
         Install-SitecoreConfiguration @sitecoreParams

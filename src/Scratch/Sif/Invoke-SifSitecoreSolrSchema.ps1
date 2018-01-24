@@ -25,14 +25,23 @@ function Invoke-SifSitecoreSolrSchema {
     [CmdletBinding()]
     Param(
         [string] $ConfigPath,
-        [string] $Sitename,
         [string] $SitecoreAdminPassword = "b"
     )
     Process {
 
+        Import-Module .\SifExtension\ScratchSifExposedExtension.psm1 -force
+        $bindings = Invoke-GetBobIISBindingsConfigFunction
+
+        if ($bindings.Count -lt 1) {
+            Write-Warning -Message "No Binding found, skipping Solr schema updating for Sitecore."
+            return
+        }
+
+        $sitecoreRootUrl = "$($bindings[0].Protocol)://$($bindings[0].HostHeader)"
+
         $sitecoreParams = @{
             Path                  = $ConfigPath
-            Sitename              = $Sitename
+            SiteUrl               = $sitecoreRootUrl
             SitecoreAdminPassword = $SitecoreAdminPassword
             Tasks                 = @("UpdateSolrSchema")
         }             

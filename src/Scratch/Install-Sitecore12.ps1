@@ -17,22 +17,34 @@ Requirements for configuration file comparing to default sitecore-XP0.json
 function Install-Sitecore12 {
     [CmdletBinding()]
     Param(
-        [string] $SifConfigPathNewSitecoreCerts,
-        [string] $ConfigPath,
+        [Parameter(Mandatory = $true)]
+        [ValidateScript({ Test-Path $_ })]
+        [string] $ModuleSifPath,
+        [Parameter(Mandatory = $true)]
+        [ValidateScript({ Test-Path $_ })]
+        [string] $ModuleFundamentalsPath,
+        [ValidateScript({ Test-Path $_ })]
+        [string] $SifConfigPathCreateCerts,
+        [Parameter(Mandatory = $true)]
+        [ValidateScript({ Test-Path $_ })]
+        [string] $SifConfigPathSitecoreXp0,
+        [Parameter(Mandatory = $true)]
+        [ValidateScript({ Test-Path $_ })]
         [string] $SitecorePackagePath,
+        [Parameter(Mandatory = $true)]
+        [ValidateScript({ Test-Path $_ })]
         [string] $LicenseFilePath,
-        [string] $CertPathFolder,
-        [string] $XConnectCertificateName
+        [string] $CertPathFolder = ".\Output\Certificates"
     )
     Process {
 
-
-        #Enable-SIF -SifPath .\Resources\SitecoreInstallFramework -FundamentalsPath .\Resources\SitecoreFundamentals
+        # Load SIF Modules
+        Enable-SIF -SifPath $ModuleSifPath -FundamentalsPath $ModuleFundamentalsPath
 
         # Prepare selfsigned certificates for Sitecore
-        if ($SifConfigPathNewSitecoreCerts -ne "") {
-            if (Test-Path -Path $SifConfigPathNewSitecoreCerts) {
-                New-SifSitecoreCertificates -ConfigPath $SifConfigPathNewSitecoreCerts -CertPathFolder $CertPathFolder
+        if ($SifConfigPathCreateCerts -ne "") {
+            if (Test-Path -Path $SifConfigPathCreateCerts) {
+                #New-SifSitecoreCertificates -ConfigPath $SifConfigPathCreateCerts -CertPathFolder $CertPathFolder
             }
             else {
                 Write-Warning "'$SifConfigPathNewSitecoreCerts' does not exist, skipping creation of self signed certs for Sitecore."
@@ -42,29 +54,17 @@ function Install-Sitecore12 {
             Write-Warning "Parameter 'SifConfigPathNewSitecoreCerts' not provided, skipping creation of self signed certs for Sitecore."
         }
 
-
         # Install Sitecore Databases
-        #Invoke-SifSitecoreDatabases -ConfigPath $ConfigPath -PackagePath $SitecorePackagePath
+        Invoke-SifSitecoreDatabases -ConfigPath $SifConfigPathSitecoreXp0 -PackagePath $SitecorePackagePath
         
         # Prepare Sitecore environment (without Sitecore WebRoot Deployment)
-        Invoke-SIFSitecoreInstance -ConfigPath $ConfigPath -XConnectCertificateName $XConnectCertificateName
+        Invoke-SIFSitecoreInstance -ConfigPath $SifConfigPathSitecoreXp0
 
         # Deploy Sitecore WebRoot and patch (connectionstrings, solr, xConnect) to environment setup
-        Invoke-SifSitecoreWebsite -ConfigPath $ConfigPath -PackagePath $SitecorePackagePath -LicenseFile $LicenseFilePath -XConnectCert $XConnectCertificateName
+        Invoke-SifSitecoreWebsite -ConfigPath $SifConfigPathSitecoreXp0 -PackagePath $SitecorePackagePath -LicenseFile $LicenseFilePath
 
+        # Update Sitecore Solr Schemas
+        Invoke-SifSitecoreSolrSchema -ConfigPath $SifConfigPathSitecoreXp0
 
-        
-        <#
-        
-        $sitecoreParams = @{
-            Path                = $ConfigPath
-            SiteGlobalWebPath   = $SiteGlobalWebPath
-            Sitename            = $Sitename
-            WebFolderName       = $WebFolderName
-            XConnectCert        = $XConnectCertificateName
-            Tasks               = @("CreatePaths")
-        }             
-        Install-SitecoreConfiguration @sitecoreParams
-        #>
     }
 }

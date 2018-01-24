@@ -25,7 +25,7 @@ function Invoke-GetBobIISBindingsConfigFunction {
             "Protocol" = $uri.Scheme
             "SSLFlags" = $ssl
 			"IpAddress" = $ip
-            "Thumbprint" = $thumbPrint
+            "Thumbprint" = $thumbPrint #"D6364D791F75CC98909F2910071AC97F3B49B86A"  #"local9.xconnect_client"
 		}
     })
 
@@ -33,6 +33,4 @@ function Invoke-GetBobIISBindingsConfigFunction {
     $bindings
 }
 
-Export-ModuleMember -Function Invoke-GetBobIISBindingsConfigFunction
-
-Register-SitecoreInstallExtension -Command Invoke-GetBobIISBindingsConfigFunction -As GetBobIISBindings -Type ConfigFunction
+Register-SitecoreInstallExtension -Command Invoke-GetBobIISBindingsConfigFunction -As GetBobIISBindings -Type ConfigFunction -Force
