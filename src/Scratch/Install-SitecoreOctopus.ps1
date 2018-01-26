@@ -14,7 +14,7 @@ Requirements for configuration file comparing to default sitecore-XP0.json
 - parameters not anymore mandatory: Package, LicenseFile, SolrCorePrefix, SqlDbPrefix
 
 #>
-function Install-Sitecore12 {
+function Install-Sitecore12Octopus {
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $true)]
