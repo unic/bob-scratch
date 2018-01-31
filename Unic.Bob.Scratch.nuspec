@@ -13,6 +13,6 @@
     <files>
         <file src="Installation.config" />
         <file src="src\**" />
-        <file src="packages\**" target="tools" exclude="**\package\services\metadata\core-properties\**;**\Unic.Bob.Keith\**;**\pester\**" />
+        <file src="packages\**" target="tools\packages" exclude="**\package\services\metadata\core-properties\**;**[Content_Types].xml;**\_rels\**;**\Unic.Bob.Keith\**;**\pester\**" />
     </files>
   </package>
