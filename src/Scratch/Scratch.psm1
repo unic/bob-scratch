@@ -1,12 +1,14 @@
 $ErrorActionPreference = "Stop"
 
 $PSScriptRoot = Split-Path  $script:MyInvocation.MyCommand.Path
+Write-Host "Root: $PSScriptRoot"
 
 function ResolvePath() {
     param($PackageId, $RelativePath)
-    $paths = @("$PSScriptRoot\..\..\packages", "$PSScriptRoot\..\tools")
+    $paths = @("$PSScriptRoot\..\..\packages", "$PSScriptRoot\..\tools", "$PSScriptRoot\..\..\..\packages")
     foreach ($packPath in $paths) {
         $path = Join-Path $packPath "$PackageId\$RelativePath"
+        Write-Host $path
         if ((Test-Path $packPath) -and (Test-Path $path)) {
             Resolve-Path $path
             return
