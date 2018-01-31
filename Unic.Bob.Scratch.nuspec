@@ -5,7 +5,8 @@
       <authors>Unic AG</authors>
       <version>$VERSION$</version>
       <owners>Unic AG</owners>
-      <iconUrl>https://www.unic.com/img/unic-logo.png</iconUrl>
+      <iconUrl>https://github.com/unic/unic/raw/master/unic_nuget.png</iconUrl>
+      <projectUrl>https://github.com/unic/bob-scratch</projectUrl>
       <requireLicenseAcceptance>false</requireLicenseAcceptance>
       <description>Scratch install Sitecore with SIF.</description>
     </metadata>
