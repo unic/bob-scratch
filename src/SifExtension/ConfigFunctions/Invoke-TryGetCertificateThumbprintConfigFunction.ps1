@@ -10,11 +10,15 @@ function Invoke-TryGetCertificateThumbprintConfigFunction {
         [string]$CertStorePath = 'Cert:\LocalMachine\My'
     )
 
-    $thumbprint = Invoke-GetCertificateThumbprintConfigFunction -Id $Id -CertStorePath $CertStorePath -ErrorAction SilentlyContinue
-    if (-not($thumbprint)) {
-        $thumbprint = "notfound"
+    # Pass verbose on if required
+    $verbose = $false
+    if($PSBoundParameters.ContainsKey('Verbose')) {
+        $verbose = $PSBoundParameters["Verbose"]
     }
-    $thumbprint
+
+    $found = Invoke-GetCertificateConfigFunction -Id $Id -CertStorePath $CertStorePath -Verbose:$verbose -WarningAction SilentlyContinue
+    if ($found) { return $found.Thumbprint }
+    return "notfound"
 }
 
 Register-SitecoreInstallExtension -Command Invoke-TryGetCertificateThumbprintConfigFunction -As TryGetCertificateThumbprint -Type ConfigFunction
