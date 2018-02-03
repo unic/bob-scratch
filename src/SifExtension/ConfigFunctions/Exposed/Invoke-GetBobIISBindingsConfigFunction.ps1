@@ -5,7 +5,7 @@ function Invoke-GetBobIISBindingsConfigFunction {
     param(
     )
 
-    $config = Get-ScProjectConfig Get-ScScratchProjectConfig
+    $config = Get-ScScratchProjectConfig
 
     $rawBindings = $config.IISBindings
 
