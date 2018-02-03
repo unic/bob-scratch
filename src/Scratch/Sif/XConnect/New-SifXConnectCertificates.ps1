@@ -33,7 +33,7 @@ function New-SifXConnectCertificates {
     )
     Process {
 
-        $InstallationConfig = Get-ScProjectConfig -ConfigFileName @("Installation.config", "Installation.config.user")
+        $InstallationConfig = Get-ScScratchProjectConfig
 
         # XConnect Certification parameters
         $XConnectClientCertificateName = $InstallationConfig.XConnectClientCertificateName

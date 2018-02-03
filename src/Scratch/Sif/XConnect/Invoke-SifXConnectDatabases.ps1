@@ -41,7 +41,7 @@ function Invoke-SifXConnectDatabases {
         [string] $PackagePath
     )
     Process {
-        $InstallationConfig = Get-ScProjectConfig -ConfigFileName @("Installation.config", "Installation.config.user")
+        $InstallationConfig = Get-ScScratchProjectConfig
 
         # Database parameters (used to setup databases)
         $SqlDbPrefix = $InstallationConfig.DatabaseDbPrefix

@@ -5,7 +5,7 @@ function Invoke-GetBobXConnectBindingConfigFunction {
     param(
     )
 
-    $config = Get-ScProjectConfig -ConfigFileName @("Installation.config", "Installation.config.user")
+    $config = Get-ScScratchProjectConfig
 
     $rawBindings = $config.XConnectCollectionServiceUrl
 

@@ -16,7 +16,7 @@ function Invoke-SifXConnectWebsite {
         [string] $LicenseFile
     )
     Process {
-        $InstallationConfig = Get-ScProjectConfig -ConfigFileName @("Installation.config", "Installation.config.user")
+        $InstallationConfig = Get-ScScratchProjectConfig
 
         # Site parameters
         $SiteGlobalWebPath = $InstallationConfig.GlobalWebPath
