@@ -57,22 +57,25 @@ function Install-XConnect12 {
         # Temporary change location so SIF can find the extensions
         Push-Location $(Split-Path(Split-Path -parent $script:MyInvocation.MyCommand.Path))
 
-        # Install XConnect Databases
-        Invoke-SifXConnectDatabases -ConfigPath $SifConfigPathXConnectXp0 -PackagePath $XConnectPackagePath
+        try{
+            # Install XConnect Databases
+            Invoke-SifXConnectDatabases -ConfigPath $SifConfigPathXConnectXp0 -PackagePath $XConnectPackagePath
 
-        # Prepare XConnect environment (without Sitecore WebRoot Deployment)
-        Invoke-SIFXConnectInstance -ConfigPath $SifConfigPathXConnectXp0 -CertPathFolder $CertPathFolder
+            # Prepare XConnect environment (without Sitecore WebRoot Deployment)
+            Invoke-SIFXConnectInstance -ConfigPath $SifConfigPathXConnectXp0 -CertPathFolder $CertPathFolder
 
-        # Deploy XConnect WebRoot and patch (connectionstrings, solr) to environment setup
-        Invoke-SifXConnectWebsite -ConfigPath $SifConfigPathXConnectXp0 -PackagePath $XConnectPackagePath -LicenseFile $LicenseFilePath
+            # Deploy XConnect WebRoot and patch (connectionstrings, solr) to environment setup
+            Invoke-SifXConnectWebsite -ConfigPath $SifConfigPathXConnectXp0 -PackagePath $XConnectPackagePath -LicenseFile $LicenseFilePath
 
-        # Deploy XConnect DB Shards
-        Invoke-SifXConnectShards -ConfigPath $SifConfigPathXConnectXp0
+            # Deploy XConnect DB Shards
+            Invoke-SifXConnectShards -ConfigPath $SifConfigPathXConnectXp0
 
-        # Deploy XConnect Services
-        Invoke-SifXConnectServices -ConfigPath $SifConfigPathXConnectXp0 -LicenseFile $LicenseFilePath
-
-        # Revert location change
-        Pop-Location
+            # Deploy XConnect Services
+            Invoke-SifXConnectServices -ConfigPath $SifConfigPathXConnectXp0 -LicenseFile $LicenseFilePath
+        }
+        finally{
+            # Revert location change
+            Pop-Location
+        }
     }
 }

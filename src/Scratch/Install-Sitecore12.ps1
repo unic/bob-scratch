@@ -57,19 +57,22 @@ function Install-Sitecore12 {
         # Temporary change location so SIF can find the extensions
         Push-Location $(Split-Path(Split-Path -parent $script:MyInvocation.MyCommand.Path))
 
-        # Install Sitecore Databases
-        Invoke-SifSitecoreDatabases -ConfigPath $SifConfigPathSitecoreXp0 -PackagePath $SitecorePackagePath
-        
-        # Prepare Sitecore environment (without Sitecore WebRoot Deployment)
-        Invoke-SIFSitecoreInstance -ConfigPath $SifConfigPathSitecoreXp0
+        try{
+            # Install Sitecore Databases
+            Invoke-SifSitecoreDatabases -ConfigPath $SifConfigPathSitecoreXp0 -PackagePath $SitecorePackagePath
+            
+            # Prepare Sitecore environment (without Sitecore WebRoot Deployment)
+            Invoke-SIFSitecoreInstance -ConfigPath $SifConfigPathSitecoreXp0
 
-        # Deploy Sitecore WebRoot and patch (connectionstrings, solr, xConnect) to environment setup
-        Invoke-SifSitecoreWebsite -ConfigPath $SifConfigPathSitecoreXp0 -PackagePath $SitecorePackagePath -LicenseFile $LicenseFilePath
+            # Deploy Sitecore WebRoot and patch (connectionstrings, solr, xConnect) to environment setup
+            Invoke-SifSitecoreWebsite -ConfigPath $SifConfigPathSitecoreXp0 -PackagePath $SitecorePackagePath -LicenseFile $LicenseFilePath
 
-        # Update Sitecore Solr Schemas
-        Invoke-SifSitecoreSolrSchema -ConfigPath $SifConfigPathSitecoreXp0
-
-        # Revert location change
-        Pop-Location
+            # Update Sitecore Solr Schemas
+            Invoke-SifSitecoreSolrSchema -ConfigPath $SifConfigPathSitecoreXp0
+        }
+        finally{
+            # Revert location change
+            Pop-Location
+        }
     }
 }
