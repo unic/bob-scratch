@@ -54,6 +54,9 @@ function Install-Sitecore12 {
             Write-Warning "Parameter 'SifConfigPathCreateCerts' not provided, skipping creation of self signed certs for Sitecore."
         }
 
+        # Temporary change location so SIF can find the extensions
+        Push-Location $(Split-Path(Split-Path -parent $script:MyInvocation.MyCommand.Path))
+
         # Install Sitecore Databases
         Invoke-SifSitecoreDatabases -ConfigPath $SifConfigPathSitecoreXp0 -PackagePath $SitecorePackagePath
         
@@ -66,5 +69,7 @@ function Install-Sitecore12 {
         # Update Sitecore Solr Schemas
         Invoke-SifSitecoreSolrSchema -ConfigPath $SifConfigPathSitecoreXp0
 
+        # Revert location change
+        Pop-Location
     }
 }

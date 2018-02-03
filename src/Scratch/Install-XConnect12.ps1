@@ -54,6 +54,9 @@ function Install-XConnect12 {
             Write-Warning "Parameter 'SifConfigPathCreateCerts' not provided, skipping creation of self signed certs for XConnect."
         }
 
+        # Temporary change location so SIF can find the extensions
+        Push-Location $(Split-Path(Split-Path -parent $script:MyInvocation.MyCommand.Path))
+
         # Install XConnect Databases
         Invoke-SifXConnectDatabases -ConfigPath $SifConfigPathXConnectXp0 -PackagePath $XConnectPackagePath
 
@@ -68,5 +71,8 @@ function Install-XConnect12 {
 
         # Deploy XConnect Services
         Invoke-SifXConnectServices -ConfigPath $SifConfigPathXConnectXp0 -LicenseFile $LicenseFilePath
+
+        # Revert location change
+        Pop-Location
     }
 }
