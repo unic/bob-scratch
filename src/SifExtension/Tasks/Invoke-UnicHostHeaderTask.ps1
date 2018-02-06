@@ -38,6 +38,10 @@ Function Invoke-UnicHostHeaderTask
 
         foreach($ipHostName in $Bindings) {
             $ip = $ipHostName.IpAddress
+            if ($ip -match "\*") {
+                Write-Warning "IP $ip contains asterisk and will not be written to the hosts file."
+                continue;
+            }
             $hostName = $ipHostName.Hostheader
             if($ipHash[$hostName] -and $ipHash[$hostName] -ne $ip) {
                 Write-Warning "Hostname $hostName has multiple IPs. The IP $ip will not be written to the hosts file."
