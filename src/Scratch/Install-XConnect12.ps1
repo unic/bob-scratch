@@ -41,23 +41,23 @@ function Install-XConnect12 {
         # Load SIF Modules
         Enable-SIF -SifPath $ModuleSifPath -FundamentalsPath $ModuleFundamentalsPath
 
-        # Prepare selfsigned certificates for Sitecore
-        if ($SifConfigPathCreateCerts -ne "") {
-            if (Test-Path -Path $SifConfigPathCreateCerts) {
-                New-SifXConnectCertificates -ConfigPath $SifConfigPathCreateCerts -CertPathFolder $CertPathFolder
-            }
-            else {
-                Write-Warning "'$SifConfigPathCreateCerts' does not exist, skipping creation of self signed certs for XConnect."
-            }
-        }
-        else {
-            Write-Warning "Parameter 'SifConfigPathCreateCerts' not provided, skipping creation of self signed certs for XConnect."
-        }
-
         # Temporary change location so SIF can find the extensions
         Push-Location $(Split-Path(Split-Path -parent $script:MyInvocation.MyCommand.Path))
 
         try{
+            # Prepare selfsigned certificates for Sitecore
+            if ($SifConfigPathCreateCerts -ne "") {
+                if (Test-Path -Path $SifConfigPathCreateCerts) {
+                    New-SifXConnectCertificates -ConfigPath $SifConfigPathCreateCerts -CertPathFolder $CertPathFolder
+                }
+                else {
+                    Write-Warning "'$SifConfigPathCreateCerts' does not exist, skipping creation of self signed certs for XConnect."
+                }
+            }
+            else {
+                Write-Warning "Parameter 'SifConfigPathCreateCerts' not provided, skipping creation of self signed certs for XConnect."
+            }
+
             # Install XConnect Databases
             Invoke-SifXConnectDatabases -ConfigPath $SifConfigPathXConnectXp0 -PackagePath $XConnectPackagePath
 
