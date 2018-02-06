@@ -69,6 +69,7 @@ function Invoke-SifSitecoreWebsite {
             SqlMarketingAutomationPassword = $SqlDbSitecoreUserPwd
             SqlFormsPassword               = $SqlDbSitecoreUserPwd
             SqlExmMasterPassword           = $SqlDbSitecoreUserPwd
+            SqlMessagingPassword           = $SqlDbSitecoreUserPwd
             SolrCorePrefix                 = $SolrCorePrefix
             SolrUrl                        = $SolrUrl
             XConnectCollectionService      = $xConnectRootUrl
