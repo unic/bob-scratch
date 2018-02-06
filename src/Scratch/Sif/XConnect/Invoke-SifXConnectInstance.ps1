@@ -43,7 +43,7 @@ function Invoke-SifXConnectInstance {
             CertPath            = $CertPathFolder        
             Tasks        = @("CreatePaths", "CreateAppPool", "SetAppPoolCertStorePermissions", "CreateWebsite", "StopWebsite", "StopAppPool", `
                     "RemoveDefaultBinding", "CreateBindingsWithThumprint", "SetClientCertificatePermissions", "SupportListManagerLargeUpload", `
-                    "CreateHostHeader", "SetPermissions", "CreateBindingsWithDevelopmentThumprint", "SetServicesCertStorePermissions", `
+                    "CreateHostHeader", "SetPermissions", "SetServicesCertStorePermissions", `
                     "StartAppPool", "StartWebsite")
         }
         Install-SitecoreConfiguration @xconnectParams
