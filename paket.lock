@@ -1,0 +1,5 @@
+NUGET
+  remote: https://www.nuget.org/api/v2
+    Pester (4.1.1)
+    Unic.Bob.Keith (2.0.1)
+    Unic.Bob.Wendy (3.0.1)
