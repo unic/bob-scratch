@@ -1,16 +1,3 @@
-<#
-.SYNOPSIS
-Task to create host headers for an IIS web site.
-.DESCRIPTION
-Creates the IIS Site and IIS Application Pool for the current Sitecore Website
-project and adds all host-names to the hosts file. Additionally it creates an
-SSL certificate for every HTTPS binding specified in the Bob.config.
-Enable-ScSite will also add the "NT Authority\Service" group as administrator to
-the SQL server.
-
-.EXAMPLE
-Enable-ScSite
-#>
 
 Set-StrictMode -Version 2.0
 
