@@ -8,7 +8,7 @@
       <iconUrl>https://github.com/unic/unic/raw/master/unic_nuget.png</iconUrl>
       <projectUrl>https://github.com/unic/bob-scratch</projectUrl>
       <requireLicenseAcceptance>false</requireLicenseAcceptance>
-      <description>Scratch install Sitecore with SIF.</description>
+      <description>Scratch installs Sitecore with SIF.</description>
     </metadata>
     <files>
         <file src="Installation.config" />

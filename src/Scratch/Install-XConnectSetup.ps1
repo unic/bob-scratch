@@ -1,20 +1,18 @@
 <#
 .SYNOPSIS
-Installs IIS site and sets permissions.
+Installs xConnect
 
 .DESCRIPTION
-Installs IIS site and sets permissions.
+Installs an xConnect instance including databases and services.
 
 .EXAMPLE
-Install-SitecoreInstance -ConfigPath "sitecore-XP0.json" -Sitename "xp0.sc" -XConnectCertificateName "xp0.xconnect_client"
+tbd
 
 .NOTES
-Requirements for configuration file comparing to default sitecore-XP0.json
-
-- parameters not anymore mandatory: Package, LicenseFile, SolrCorePrefix, SqlDbPrefix
+tbd
 
 #>
-function Install-XConnect12 {
+function Install-XConnectSetup {
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $true)]

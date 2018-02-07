@@ -1,7 +1,7 @@
 Set-StrictMode -Version 2.0
 
 Function Invoke-ManageExistingAppPoolTask {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess=$false)]
     param(
         [Parameter(Mandatory=$true)]
         [string]$Name,

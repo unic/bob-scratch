@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-Creates the IIS Site and IIS Application Pool for the current Sitecore Website project.
+Task to create host headers for an IIS web site.
 .DESCRIPTION
 Creates the IIS Site and IIS Application Pool for the current Sitecore Website
 project and adds all host-names to the hosts file. Additionally it creates an
@@ -14,12 +14,9 @@ Enable-ScSite
 
 Set-StrictMode -Version 2.0
 
-Function Invoke-UnicHostHeaderTask
+Function Invoke-ScratchHostHeaderTask
 {
-    [CmdletBinding(
-        SupportsShouldProcess=$True,
-        ConfirmImpact="Low"
-    )]
+    [CmdletBinding(SupportsShouldProcess=$false)]
     Param(
         [psobject[]] $Bindings,
         [string] $SiteName,
@@ -92,4 +89,4 @@ Function Invoke-UnicHostHeaderTask
     }
 }
 
-Register-SitecoreInstallExtension -Command Invoke-UnicHostHeaderTask -As HostHeader -Type Task -Force
+Register-SitecoreInstallExtension -Command Invoke-ScratchHostHeaderTask -As HostHeader -Type Task -Force

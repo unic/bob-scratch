@@ -1,20 +1,18 @@
 <#
 .SYNOPSIS
-Installs IIS site and sets permissions.
+Installs a Sitecore instance
 
 .DESCRIPTION
-Installs IIS site and sets permissions.
+The Sitecore instance installation includes databases, instance and solr schema.
 
 .EXAMPLE
-Install-SitecoreInstance -ConfigPath "sitecore-XP0.json" -Sitename "xp0.sc" -XConnectCertificateName "xp0.xconnect_client"
+tbd
 
 .NOTES
-Requirements for configuration file comparing to default sitecore-XP0.json
-
-- parameters not anymore mandatory: Package, LicenseFile, SolrCorePrefix, SqlDbPrefix
+tbd
 
 #>
-function Install-Sitecore12 {
+function Install-SitecoreSetup {
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $true)]

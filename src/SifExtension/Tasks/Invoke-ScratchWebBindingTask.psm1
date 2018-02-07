@@ -4,8 +4,8 @@ Set-StrictMode -Version 2.0
 
 AssertWebAdministration -ScriptName $MyInvocation.MyCommand.Name
 
-function Invoke-UnicWebBindingTask {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+function Invoke-ScratchWebBindingTask {
+    [CmdletBinding(SupportsShouldProcess=$false)]
     param(
         [Parameter(Mandatory=$true)]
         [string]$SiteName,
@@ -128,4 +128,4 @@ function Invoke-UnicWebBindingTask {
     }
 }
 
-Register-SitecoreInstallExtension -Command Invoke-UnicWebBindingTask -As WebBinding -Type Task
+Register-SitecoreInstallExtension -Command Invoke-ScratchWebBindingTask -As WebBinding -Type Task

@@ -9,7 +9,7 @@ Installs IndexWorker and MarketingAutomationEngine services.
 Invoke-SifXConnectServices -ConfigPath "xconnect-xp0.json" -Sitename "$prefix.xconnect" -LicenseFile "license.xml"
 
 .NOTES
-Webiste has to be installed first because of reference to App_Data\jobs\continuous\(AutomationEngine|IndexWorker) content.
+Website has to be installed first because of reference to App_Data\jobs\continuous\(AutomationEngine|IndexWorker) content.
 
 #>
 function Invoke-SifXConnectServices {
