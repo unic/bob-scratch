@@ -3,16 +3,16 @@
 Installs Sitecore Databases.
 
 .DESCRIPTION
-Installs the databases required for a xp0 instance (does not include xconnect dbs)
+Installs the databases required for an xp0 instance (does not include xconnect dbs).
 
 .EXAMPLE
-Install-Sitecore12Databases c:\temp\SitecoreInstallFramework c:\temp\SitecoreFundamentals c:\temp\sitecore-XP0.json c:\temp\xp0.scwdp.zip
+Install-SitecoreDatabasesSetup c:\temp\SitecoreInstallFramework c:\temp\SitecoreFundamentals c:\temp\sitecore-XP0.json c:\temp\xp0.scwdp.zip
 
 .NOTES
 Requirements for configuration file comparing to default sitecore-XP0.json
 
 #>
-function Install-Sitecore12Databases {
+function Install-SitecoreDatabasesSetup {
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $true)]
