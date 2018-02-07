@@ -1,4 +1,5 @@
-<div class="chapterlogo">![Scratch](Scratch.jpg)</div>
+<div class="chapterlogo"><img src="./Scratch.jpg" /></div>
+
 # Scratch
 
-Install Sitecore with SIF.
+Scratch provides integration with SIF and is used by Scoop to install Sitecore versions greater 9.

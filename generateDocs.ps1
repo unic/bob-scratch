@@ -1,5 +1,3 @@
-param($username, $password, [switch]$Buildserver)
-
 $PSScriptRoot = split-path -parent $MyInvocation.MyCommand.Definition
 
 $module = "Scratch"
