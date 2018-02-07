@@ -35,15 +35,16 @@ function Invoke-SifXConnectShards {
         $SqlAdminPwd = $InstallationConfig.DatabaseAdminPwd
 
         $xconnectParams = @{
-            Path             = $ConfigPath
-            SiteGlobalWebPath   = $SiteGlobalWebPath
-            Sitename            = $Sitename
-            WebFolderName       = $WebFolderName
-            SqlDbPrefix      = $SqlDbPrefix
-            SqlServer        = $SqlDbServer
-            SqlAdminUser     = $SqlAdminUser
-            SqlAdminPassword = $SqlAdminPwd
-            Tasks            = @("CleanShards", "CreateShards", "CreateShardApplicationDatabaseServerLoginSqlCmd", "CreateShardManagerApplicationDatabaseUserSqlCmd", "CreateShard0ApplicationDatabaseUserSqlCmd", "CreateShard1ApplicationDatabaseUserSqlCmd")
+            Path                  = $ConfigPath
+            SiteGlobalWebPath     = $SiteGlobalWebPath
+            Sitename              = $Sitename
+            WebFolderName         = $WebFolderName
+            SqlDbPrefix           = $SqlDbPrefix
+            SqlServer             = $SqlDbServer
+            SqlAdminUser          = $SqlAdminUser
+            SqlAdminPassword      = $SqlAdminPwd
+            SqlCollectionPassword = $SqlDbSitecoreUserPwd
+            Tasks                 = @("CleanShards", "CreateShards", "CreateShardApplicationDatabaseServerLoginSqlCmd", "CreateShardManagerApplicationDatabaseUserSqlCmd", "CreateShard0ApplicationDatabaseUserSqlCmd", "CreateShard1ApplicationDatabaseUserSqlCmd")
         }
         Install-SitecoreConfiguration @xconnectParams
     }
