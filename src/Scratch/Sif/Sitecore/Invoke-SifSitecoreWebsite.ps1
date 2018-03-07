@@ -39,6 +39,7 @@ function Invoke-SifSitecoreWebsite {
         $SiteGlobalWebPath = $InstallationConfig.GlobalWebPath
         $Sitename = $InstallationConfig.WebsiteCodeName 
         $WebFolderName = $InstallationConfig.WebFolderName
+        $DataFolder = $InstallationConfig.DataFolderPath
         # Database parameters (used to replace values in connectionString.config)
         $SqlDbPrefix = $InstallationConfig.DatabaseDbPrefix
         $SqlDbServer = $InstallationConfig.DatabaseServer
@@ -50,13 +51,13 @@ function Invoke-SifSitecoreWebsite {
         $xConnectRootUrl = Get-XConnectWebsiteUrl
         $XConnectClientCertificateName = $InstallationConfig.XConnectClientCertificateName
 
-
         $sitecoreParams = @{
             Path                           = $ConfigPath
             Package                        = $PackagePath
             SiteGlobalWebPath              = $SiteGlobalWebPath
             Sitename                       = $Sitename
             WebFolderName                  = $WebFolderName
+            SiteDataFolderPath             = $DataFolder
             SqlDbPrefix                    = $SqlDbPrefix
             SqlServer                      = $SqlDbServer
             SqlCorePassword                = $SqlDbSitecoreUserPwd
