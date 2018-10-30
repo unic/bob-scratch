@@ -18,7 +18,7 @@ function ResolvePath() {
     Write-Error "No path found for $RelativePath in package $PackageId"
 }
 
-Import-Module (ResolvePath "Unic.Bob.Wendy" "tools\Wendy") -Force
+#Import-Module (ResolvePath "Unic.Bob.Wendy" "tools\Wendy") -Force
 Export-ModuleMember -Function Get-ScProjectConfig
 
 $VerbosePreference = "Continue"
