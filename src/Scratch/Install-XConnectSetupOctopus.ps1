@@ -12,7 +12,7 @@ tbd
 tbd
 
 #>
-function Install-XConnectSetup {
+function Install-XConnectSetupOctopus {
     [CmdletBinding()]
     Param(
         [Parameter(Mandatory = $true)]
